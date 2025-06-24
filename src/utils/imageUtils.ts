@@ -6,31 +6,33 @@
 export const getImageUrl = (imagePath: string): string => {
   try {
     if (!imagePath) {
-      console.warn('getImageUrl: Empty image path provided');
+      console.warn('[getImageUrl] Empty image path provided');
       return '';
     }
 
-    // Remove leading slash if present for consistency
-    const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-    
     // In Vite, public assets are available at the root in development
     // and are copied to the dist folder in production
     const isProduction = import.meta.env.PROD;
-    const baseUrl = isProduction ? '' : '';
     
-    // Add cache busting query parameter in production
-    const cacheBuster = isProduction 
-      ? `?v=${import.meta.env.VITE_APP_VERSION || '1.0.0'}` 
-      : '';
+    // For production, we need to ensure the path is correct relative to the base URL
+    // For development, we can use the path as is since it's served from the public directory
+    let finalPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
     
-    // Construct the final URL
-    const finalUrl = `${baseUrl}/${cleanPath}${cacheBuster}`.replace(/\/+/g, '/');
-    
+    // In production, we need to make sure the path is correct relative to the base URL
     if (isProduction) {
-      console.log(`[getImageUrl] Generated URL for ${imagePath}:`, finalUrl);
+      // Ensure we don't have double slashes
+      finalPath = finalPath.replace(/^\/+/, '');
+      
+      // Add cache busting query parameter
+      const cacheBuster = `?v=${import.meta.env.VITE_APP_VERSION || '1.0.0'}`;
+      finalPath = `/${finalPath}${cacheBuster}`;
+      
+      console.log(`[getImageUrl] Production URL for ${imagePath}:`, finalPath);
+    } else {
+      console.log(`[getImageUrl] Development URL for ${imagePath}:`, finalPath);
     }
     
-    return finalUrl;
+    return finalPath;
   } catch (error) {
     console.error('[getImageUrl] Error generating URL for', imagePath, ':', error);
     return imagePath; // Fallback to the original path
