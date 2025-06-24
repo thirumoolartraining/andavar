@@ -3,13 +3,14 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: '/', // Use root-relative paths for better compatibility
+  base: mode === 'production' ? '/' : '/',
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
       '@public': path.resolve(__dirname, './public'),
+      '@assets': path.resolve(__dirname, './src/assets'),
     },
   },
   optimizeDeps: {
@@ -20,10 +21,20 @@ export default defineConfig({
     assetsDir: 'assets',
     sourcemap: true,
     emptyOutDir: true,
-    assetsInlineLimit: 4096, // 4kb
+    assetsInlineLimit: 0, // Always externalize assets for better caching
+    rollupOptions: {
+      output: {
+        assetFileNames: 'assets/[name]-[hash][extname]',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        entryFileNames: 'assets/[name]-[hash].js',
+      },
+    },
   },
   server: {
     port: 3000,
     open: true,
+    host: true,
   },
-});
+  // Ensure public directory is properly handled
+  publicDir: 'public',
+}));

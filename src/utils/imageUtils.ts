@@ -1,35 +1,38 @@
 /**
  * Gets the correct image path for both development and production environments
  * @param imagePath The path to the image relative to the public directory (e.g., '/images/logo.png')
- * @returns The correct image path with cache busting
+ * @returns The correct image URL with cache busting
  */
 export const getImageUrl = (imagePath: string): string => {
   try {
+    if (!imagePath) {
+      console.warn('getImageUrl: Empty image path provided');
+      return '';
+    }
+
     // Remove leading slash if present for consistency
     const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
     
-    // Handle different environments
-    let baseUrl = '';
-    
-    // In Vite, public assets are always available at the root in development
+    // In Vite, public assets are available at the root in development
     // and are copied to the dist folder in production
-    if (import.meta.env.PROD) {
-      // In production, use absolute paths from the root
-      baseUrl = ''; // Vite handles the base URL based on the base config
-    } else {
-      // In development, serve from the public directory
-      baseUrl = '';
-    }
+    const isProduction = import.meta.env.PROD;
+    const baseUrl = isProduction ? '' : '';
     
     // Add cache busting query parameter in production
-    const cacheBuster = import.meta.env.PROD ? `?v=${import.meta.env.VITE_APP_VERSION || Date.now()}` : '';
+    const cacheBuster = isProduction 
+      ? `?v=${import.meta.env.VITE_APP_VERSION || '1.0.0'}` 
+      : '';
     
     // Construct the final URL
     const finalUrl = `${baseUrl}/${cleanPath}${cacheBuster}`.replace(/\/+/g, '/');
     
+    if (isProduction) {
+      console.log(`[getImageUrl] Generated URL for ${imagePath}:`, finalUrl);
+    }
+    
     return finalUrl;
   } catch (error) {
-    console.error('Error generating image URL:', error);
+    console.error('[getImageUrl] Error generating URL for', imagePath, ':', error);
     return imagePath; // Fallback to the original path
   }
 };
