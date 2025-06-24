@@ -3,6 +3,7 @@ import { ShoppingCart } from 'lucide-react'
 import { Product } from '../data/products'
 import { useCartStore } from '../store/cartStore'
 import AddToCartModal from './AddToCartModal'
+import { getImageUrl } from '../utils/imageUtils'
 
 interface ProductCardProps {
   product: Product
@@ -22,7 +23,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="aspect-[4/5] overflow-hidden flex-shrink-0 relative group">
           <div className="absolute inset-0 bg-gray-100">
             <img
-              src={product.image}
+              src={getImageUrl(product.image)}
               alt={product.name}
               className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 transform-gpu will-change-transform"
               loading="lazy"

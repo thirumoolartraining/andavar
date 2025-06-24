@@ -62,9 +62,10 @@ const Checkout: React.FC = () => {
                 {items.map((item) => (
                   <div key={item.id} className="flex space-x-4 p-4 border rounded-lg">
                     <img
-                      src={item.image}
+                      src={getImageUrl(item.image)}
                       alt={item.name}
                       className="w-16 h-16 object-cover rounded-lg flex-shrink-0"
+                      loading="lazy"
                     />
                     <div className="flex-1 min-w-0">
                       <h3 className="font-title font-medium text-[#222222] truncate">{item.name}</h3>

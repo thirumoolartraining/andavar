@@ -4,6 +4,7 @@ import { useCartStore } from '../store/cartStore'
 import { Link } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import type { MouseEvent } from 'react' // Import MouseEvent type
+import { getImageUrl } from '../utils/imageUtils'
 
 const CartDrawer: React.FC = () => {
   const { 
@@ -78,9 +79,10 @@ const CartDrawer: React.FC = () => {
                     >
                       <div className="flex-shrink-0 w-20 h-20 bg-gray-100 rounded-md overflow-hidden">
                         <img
-                          src={item.image}
+                          src={getImageUrl(item.image)}
                           alt={item.name}
                           className="w-full h-full object-cover"
+                          loading="lazy"
                         />
                       </div>
                       <div className="flex-1 min-w-0">

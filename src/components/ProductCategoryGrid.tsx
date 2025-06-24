@@ -2,6 +2,7 @@ import React from 'react'
 import { useProducts } from '../hooks/useProducts'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
+import { getImageUrl } from '../utils/imageUtils'
 
 const ProductCategoryGrid: React.FC = () => {
   const { products, loading } = useProducts()
@@ -48,9 +49,10 @@ const ProductCategoryGrid: React.FC = () => {
               className="block group relative aspect-[4/5] rounded-lg sm:rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105"
             >
               <img
-                src={product.image}
+                src={getImageUrl(product.image)}
                 alt={product.name}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                loading="lazy"
               />
               
               {/* Overlay */}

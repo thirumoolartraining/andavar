@@ -4,6 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
 import { X, Plus, Minus } from 'lucide-react'
 import { Product } from '../data/products'
+import { getImageUrl } from '../utils/imageUtils'
 
 const addToCartSchema = z.object({
   quantity: z.number().min(1, 'Quantity must be at least 1')
@@ -74,9 +75,10 @@ const AddToCartModal: React.FC<AddToCartModalProps> = ({
 
         <div className="mb-6">
           <img
-            src={product.image}
+            src={getImageUrl(product.image)}
             alt={product.name}
             className="w-full h-48 object-cover rounded-lg mb-4"
+            loading="lazy"
           />
           <h3 className="text-xl font-bold text-[#222222] mb-2">{product.name}</h3>
           <p className="text-gray-600 text-sm mb-2">{product.description}</p>
