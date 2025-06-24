@@ -1,5 +1,6 @@
 import React from 'react'
 import { ChevronDown } from 'lucide-react'
+import { getImageUrl } from '../utils/imageUtils'
 
 const Hero: React.FC = () => {
   const scrollToProducts = () => {
@@ -36,9 +37,10 @@ const Hero: React.FC = () => {
           <div className="relative order-1 lg:order-2">
             <div className="aspect-square sm:aspect-[4/5] lg:aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl mx-auto max-w-md sm:max-w-lg lg:max-w-none">
               <img
-                src="/images/products/andavar-textile-hero.png"
+                src={getImageUrl('/images/products/andavar-textile-hero.png')}
                 alt="Andavar Textile - Traditional Indian textile craftsmanship"
                 className="w-full h-full object-cover"
+                loading="eager"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#800000]/20 to-transparent"></div>
             </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Globe, Target, Heart, Shield } from 'lucide-react'
+import { getImageUrl } from '../utils/imageUtils'
 
 const AboutUs: React.FC = () => {
   const values = [
@@ -81,9 +82,10 @@ const AboutUs: React.FC = () => {
             </div>
             <div className="relative order-1 lg:order-2">
               <img
-                src="/images/products/our-story.png"
+                src={getImageUrl('/images/products/our-story.png')}
                 alt="Andavar Textile - Our Story"
                 className="rounded-xl sm:rounded-2xl shadow-xl w-full"
+                loading="lazy"
               />
             </div>
           </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { Menu, X, ShoppingCart } from 'lucide-react'
 import { useCartStore } from '../store/cartStore'
+import { getImageUrl } from '../utils/imageUtils'
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -24,7 +25,7 @@ const Header: React.FC = () => {
           {/* Logo */}
           <Link to="/" className="flex items-center flex-shrink-0">
             <img 
-              src="/images/logo/andavar-logo.png" 
+              src={getImageUrl('/images/logo/andavar-logo.png')} 
               alt="Andavar Textile Logo" 
               className="h-12 w-auto sm:h-16 md:h-20 transition-all duration-200 hover:opacity-90"
             />

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { Instagram, MessageCircle, Linkedin, MapPin, Phone, Mail, ArrowUp } from 'lucide-react'
+import { getImageUrl } from '../utils/imageUtils'
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -25,7 +26,7 @@ const Footer: React.FC = () => {
             <div className="mb-4 sm:mb-6">
               <Link to="/" className="inline-block">
                 <img 
-                  src="/images/logo/andavar-logo.png" 
+                  src={getImageUrl('/images/logo/andavar-logo.png')}
                   alt="Andavar Textile Logo" 
                   className="h-12 w-auto sm:h-16 md:h-20 bg-white p-1 rounded-md shadow-sm"
                 />

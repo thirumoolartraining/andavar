@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight, Award, Globe, Users } from 'lucide-react'
+import { getImageUrl } from '../utils/imageUtils'
 
 const AboutSection: React.FC = () => {
   return (
@@ -11,9 +12,10 @@ const AboutSection: React.FC = () => {
           <div className="relative order-2 lg:order-1">
             <div className="aspect-[4/3] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl">
               <img
-                src="/images/products/andavar-textile-about.png"
+                src={getImageUrl('/images/products/andavar-textile-about.png')}
                 alt="Andavar Textile - Our Craftsmanship"
                 className="w-full h-full object-cover"
+                loading="lazy"
               />
             </div>
             
