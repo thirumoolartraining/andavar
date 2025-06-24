@@ -18,6 +18,9 @@ dist-ssr
 .idea
 .DS_Store
 *.suo
+
+# Bolt directory
+.bolt/
 *.ntvs*
 *.njsproj
 *.sln
