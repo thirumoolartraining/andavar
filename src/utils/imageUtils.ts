@@ -12,19 +12,31 @@ export const getImageUrl = (imagePath: string): string => {
 
     const isProduction = import.meta.env.PROD;
     
-    // Remove leading slash if present for consistency
-    const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
-    
+    // Normalize the path - remove leading slash and any unwanted characters
+    const cleanPath = imagePath
+      .replace(/^\/+/, '') // Remove leading slashes
+      .replace(/\?.*$/, ''); // Remove any query parameters
+
     // In development, Vite serves files from the public directory
     if (!isProduction) {
       return `/${cleanPath}`;
     }
     
-    // In production, files are in the assets directory with hashed names
-    // We need to let Vite handle the final path through the build process
-    // The path should be relative to the public directory
+    // In production, we need to handle different scenarios:
+    // 1. For images in public directory that should be copied as-is
+    // 2. For imported images that get hashed by Vite
+    
+    // If the path contains 'assets' or 'images', assume it's already processed by Vite
+    if (cleanPath.includes('assets/') || cleanPath.includes('images/')) {
+      return `/${cleanPath}`;
+    }
+    
+    // For public assets, we need to reference them from the root
+    // Vercel will serve these from the root of the deployed site
     const cacheBuster = import.meta.env.VITE_APP_VERSION || '1.0.0';
-    return `/${cleanPath}?v=${cacheBuster}`;
+    const url = `/${cleanPath}?v=${cacheBuster}`;
+    
+    return url;
   } catch (error) {
     console.error('[getImageUrl] Error generating URL for', imagePath, ':', error);
     return imagePath; // Fallback to the original path
