@@ -1,7 +1,7 @@
 /**
  * Gets the correct image path for both development and production environments
- * @param imagePath The path to the image relative to the public directory (e.g., '/images/logo.png')
- * @returns The correct image URL with cache busting
+ * @param imagePath The path to the image relative to the public directory (e.g., 'images/logo.png' or '/images/logo.png')
+ * @returns The correct image URL with cache busting in production
  */
 export const getImageUrl = (imagePath: string): string => {
   try {
@@ -10,29 +10,21 @@ export const getImageUrl = (imagePath: string): string => {
       return '';
     }
 
-    // In Vite, public assets are available at the root in development
-    // and are copied to the dist folder in production
     const isProduction = import.meta.env.PROD;
     
-    // For production, we need to ensure the path is correct relative to the base URL
-    // For development, we can use the path as is since it's served from the public directory
-    let finalPath = imagePath.startsWith('/') ? imagePath : `/${imagePath}`;
+    // Remove leading slash if present for consistency
+    const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
     
-    // In production, we need to make sure the path is correct relative to the base URL
-    if (isProduction) {
-      // Ensure we don't have double slashes
-      finalPath = finalPath.replace(/^\/+/, '');
-      
-      // Add cache busting query parameter
-      const cacheBuster = `?v=${import.meta.env.VITE_APP_VERSION || '1.0.0'}`;
-      finalPath = `/${finalPath}${cacheBuster}`;
-      
-      console.log(`[getImageUrl] Production URL for ${imagePath}:`, finalPath);
-    } else {
-      console.log(`[getImageUrl] Development URL for ${imagePath}:`, finalPath);
+    // In development, Vite serves files from the public directory
+    if (!isProduction) {
+      return `/${cleanPath}`;
     }
     
-    return finalPath;
+    // In production, files are in the assets directory with hashed names
+    // We need to let Vite handle the final path through the build process
+    // The path should be relative to the public directory
+    const cacheBuster = import.meta.env.VITE_APP_VERSION || '1.0.0';
+    return `/${cleanPath}?v=${cacheBuster}`;
   } catch (error) {
     console.error('[getImageUrl] Error generating URL for', imagePath, ':', error);
     return imagePath; // Fallback to the original path
