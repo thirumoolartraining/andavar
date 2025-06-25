@@ -11,8 +11,8 @@
   ],
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "src": "/(.*)\\.(jpg|jpeg|png|svg|gif|ico|webp|avif|css|js|woff|woff2|ttf|eot)$",
+      "dest": "/$1"
     },
     {
       "src": "/(.*)",

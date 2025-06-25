@@ -6,12 +6,11 @@ import { resolve } from 'path';
 export default defineConfig(({ mode }) => {
   // Load env vars based on the current mode
   const env = loadEnv(mode, process.cwd(), '');
-  const isProduction = mode === 'production';
 
   return {
     plugins: [react()],
     // Use Vercel's URL in production, or relative path in development
-    base: isProduction ? '/' : '/',
+    base: '/',
     
     resolve: {
       alias: {
