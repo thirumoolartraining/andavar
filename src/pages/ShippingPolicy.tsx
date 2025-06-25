@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { CONTACT } from '../data/constants';
 
 const ShippingPolicy: React.FC = () => {
   return (
@@ -129,7 +130,8 @@ const ShippingPolicy: React.FC = () => {
               Our customer support team is here to assist with any shipping-related questions or concerns. Reach out to us via:
             </p>
             <ul className="list-disc pl-6 space-y-2 mb-4">
-              <li>Email: <a href="mailto:info@andavartextiles.shop" className="text-blue-600 hover:underline">info@andavartextiles.shop</a></li>
+              <li>Email: <a href={`mailto:${CONTACT.EMAILS.PRIMARY}`} className="text-blue-600 hover:underline">{CONTACT.EMAILS.PRIMARY}</a></li>
+              <li>Email: <a href={`mailto:${CONTACT.EMAILS.SECONDARY}`} className="text-blue-600 hover:underline">{CONTACT.EMAILS.SECONDARY}</a></li>
               <li>Phone/WhatsApp: <a href="tel:+919342752821" className="text-blue-600 hover:underline">+91 93427 52821</a></li>
               <li>Live Chat: Available during business hours (Mon-Sat, 10 AM - 6 PM IST)</li>
             </ul>

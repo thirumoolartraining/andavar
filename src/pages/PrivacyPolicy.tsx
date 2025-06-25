@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { CONTACT } from '../data/constants';
 
 const PrivacyPolicy: React.FC = () => {
   return (
@@ -96,7 +97,11 @@ const PrivacyPolicy: React.FC = () => {
                 <p>Attn: Data Protection Officer</p>
                 <p>123 Textile Complex, Erode Road,</p>
                 <p>Coimbatore - 641 021, Tamil Nadu, India</p>
-                <p className="mt-2">Email: <a href="mailto:info@andavartextiles.shop" className="text-[#800000] hover:underline">info@andavartextiles.shop</a></p>
+                <p className="mt-2">
+                  Email: <a href={`mailto:${CONTACT.EMAILS.PRIMARY}`} className="text-[#800000] hover:underline">{CONTACT.EMAILS.PRIMARY}</a>
+                  <br />
+                  <span className="ml-12"><a href={`mailto:${CONTACT.EMAILS.SECONDARY}`} className="text-[#800000] hover:underline">{CONTACT.EMAILS.SECONDARY}</a></span>
+                </p>
                 <p>Phone: <a href="tel:+919342752821" className="text-[#800000] hover:underline">+91 93427 52821</a></p>
               </div>
               <p>

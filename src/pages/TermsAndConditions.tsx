@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { CONTACT } from '../data/constants';
 
 const TermsAndConditions: React.FC = () => {
   return (
@@ -156,7 +157,8 @@ const TermsAndConditions: React.FC = () => {
               <p>Tirunelveli - 627416</p>
               <p>Tamil Nadu, India</p>
               <p className="mt-2">📞 Phone: <a href="tel:+919342752821" className="text-[#800000] hover:underline">+91 93427 52821</a></p>
-              <p>📧 Email: <a href="mailto:info@andavartextiles.shop" className="text-[#800000] hover:underline">info@andavartextiles.shop</a></p>
+              <p>📧 Email: <a href={`mailto:${CONTACT.EMAILS.PRIMARY}`} className="text-[#800000] hover:underline">{CONTACT.EMAILS.PRIMARY}</a></p>
+              <p>📧 <a href={`mailto:${CONTACT.EMAILS.SECONDARY}`} className="text-[#800000] hover:underline">{CONTACT.EMAILS.SECONDARY}</a></p>
               <p>💬 WhatsApp & Contact Form: Available on our <Link to="/contact" className="text-[#800000] hover:underline">Contact Us</Link> page</p>
             </div>
           </Section>

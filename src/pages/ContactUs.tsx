@@ -1,6 +1,7 @@
 import React from 'react'
 import { MapPin, Phone, Mail, Clock, MessageCircle } from 'lucide-react'
 import ContactForm from '../components/ContactForm'
+import { CONTACT } from '../data/constants'
 
 const ContactUs: React.FC = () => {
   const contactInfo = [
@@ -26,7 +27,8 @@ const ContactUs: React.FC = () => {
       icon: Mail,
       title: 'Email Us',
       details: [
-        'info@andavartextiles.shop'
+        CONTACT.EMAILS.PRIMARY,
+        CONTACT.EMAILS.SECONDARY
       ]
     },
     {

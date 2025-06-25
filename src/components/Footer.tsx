@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Instagram, MessageCircle, Linkedin, MapPin, Phone, Mail, ArrowUp } from 'lucide-react'
 import { getImageUrl } from '../utils/imageUtils'
+import { CONTACT } from '../data/constants'
 
 const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -55,9 +56,16 @@ const Footer: React.FC = () => {
                 <span className="font-text text-xs sm:text-sm text-gray-300">+91 93427 52821</span>
               </div>
               
-              <div className="flex items-center space-x-3">
-                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-[#FFD700]" />
-                <span className="font-text text-xs sm:text-sm text-gray-300">info@andavartextiles.shop</span>
+              <div className="flex items-start space-x-3">
+                <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-[#FFD700] mt-1 flex-shrink-0" />
+                <div className="space-y-1">
+                  <div className="font-text text-xs sm:text-sm text-gray-300">
+                    {CONTACT.EMAILS.PRIMARY}
+                  </div>
+                  <div className="font-text text-xs sm:text-sm text-gray-300">
+                    {CONTACT.EMAILS.SECONDARY}
+                  </div>
+                </div>
               </div>
             </div>
           </div>

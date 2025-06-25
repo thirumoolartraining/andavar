@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { CONTACT } from '../data/constants';
 
 // Reusable Section Component
 const Section: React.FC<{ title?: string; children: React.ReactNode }> = ({ title, children }) => (
@@ -135,7 +136,8 @@ const CancellationRefundPolicy: React.FC = () => {
             </p>
             <ul className="list-disc pl-6 space-y-2 mb-4">
               <li>Phone: <a href="tel:+919342752821" className="text-blue-600 hover:underline">+91 93427 52821</a></li>
-              <li>Email: <a href="mailto:info@andavartextiles.shop" className="text-blue-600 hover:underline">info@andavartextiles.shop</a></li>
+              <li>Email: <a href={`mailto:${CONTACT.EMAILS.PRIMARY}`} className="text-blue-600 hover:underline">{CONTACT.EMAILS.PRIMARY}</a></li>
+              <li>Email: <a href={`mailto:${CONTACT.EMAILS.SECONDARY}`} className="text-blue-600 hover:underline">{CONTACT.EMAILS.SECONDARY}</a></li>
               <li>WhatsApp: Available via website</li>
               <li>Or use the <Link to="/contact" className="text-blue-600 hover:underline">Contact Form</Link> on our website</li>
             </ul>
