@@ -7,6 +7,7 @@ import { countries } from '../data/products'
 import { useNavigate } from 'react-router-dom'
 import { useFormSubmission } from '../hooks/useFormSubmission'
 import { ShoppingBag, CreditCard, Plus, Minus } from 'lucide-react'
+import { getImageUrl } from '../utils/imageUtils'
 
 const Checkout: React.FC = () => {
   const { items, getTotalPrice, clearCart, updateQuantity } = useCartStore()
